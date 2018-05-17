@@ -22,7 +22,7 @@ pod 'SwiftyToolTip'
 
 ## Author
 
-BobDeKort, dekort.bob101@gmail.com
+BobDeKort, dekortbob@hotmail.com
 
 ## License
 

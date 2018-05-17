@@ -24,7 +24,7 @@ With just 1 line of code you can add a tooltip to any UIView or subclass describ
   s.homepage         = 'https://github.com/BobDeKort/SwiftyToolTip'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'BobDeKort' => 'dekort.bob101@gmail.com' }
+  s.author           = { 'Bob De Kort' => 'dekortbob@hotmail.com' }
   s.source           = { :git => 'https://github.com/BobDeKort/SwiftyToolTip.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '9.0'
