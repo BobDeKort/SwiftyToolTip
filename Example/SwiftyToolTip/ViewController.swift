@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import SwiftyToolTip
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var label: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        label.addToolTip(description: "This is a label that says label", gesture: .longPress, isEnabled: true)
+        button.addToolTip(description: "This is a button that executes some stuff and things", gesture: .doubleTap, isEnabled: true)
     }
 
     override func didReceiveMemoryWarning() {

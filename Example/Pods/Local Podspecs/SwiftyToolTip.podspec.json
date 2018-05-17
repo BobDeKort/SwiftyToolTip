@@ -1,0 +1,22 @@
+{
+  "name": "SwiftyToolTip",
+  "version": "0.1.4",
+  "summary": "Add a tooltip to any UIView or subclass with just a single line of code",
+  "description": "With just 1 line of code you can add a tooltip to any UIView or subclass describing the functionality or content of that view. Add description for the action of buttons or show your user exactly what is displayed in a certain view. You can even use it to add a description to UIImageViews.",
+  "homepage": "https://github.com/BobDeKort/SwiftyToolTip",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "BobDeKort": "dekort.bob101@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/BobDeKort/SwiftyToolTip.git",
+    "tag": "0.1.4"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "SwiftyToolTip/Classes/**/*"
+}

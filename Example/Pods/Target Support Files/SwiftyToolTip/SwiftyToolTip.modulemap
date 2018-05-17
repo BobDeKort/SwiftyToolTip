@@ -1,0 +1,6 @@
+framework module SwiftyToolTip {
+  umbrella header "SwiftyToolTip-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module Pods_SwiftyToolTip_Tests {
+  umbrella header "Pods-SwiftyToolTip_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
