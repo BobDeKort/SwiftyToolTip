@@ -11,7 +11,7 @@ PODS:
     - FBSnapshotTestCase (~> 2.0)
     - Nimble (~> 7.0)
   - Quick (1.2.0)
-  - SwiftyToolTip (0.1.4)
+  - SwiftyToolTip (0.0.1)
 
 DEPENDENCIES:
   - FBSnapshotTestCase (~> 2.1.4)
@@ -36,7 +36,7 @@ SPEC CHECKSUMS:
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
-  SwiftyToolTip: f3712ed615e1f3f49b6a72f1e32e4594e03a3ee6
+  SwiftyToolTip: fadd0b85dce203271232d1e21a8e448df9eec9fa
 
 PODFILE CHECKSUM: d1bab2a260163e787aee9cf97d24f7334e1c3083
 
