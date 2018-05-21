@@ -15,6 +15,7 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		7DE9BB126251DCB018C08981 /* Pods_SwiftyToolTip_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 895D6BFF03694B85B8496730 /* Pods_SwiftyToolTip_Example.framework */; };
 		C40DA12F20B35C6B00246494 /* ToolTipDescriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40DA12E20B35C6B00246494 /* ToolTipDescriptions.swift */; };
+		C40DA13120B3617700246494 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40DA13020B3617700246494 /* CustomTableViewCell.swift */; };
 		C40FFB9620AEA7CF00DADE95 /* AddScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40FFB9520AEA7CF00DADE95 /* AddScreenViewController.swift */; };
 		FD00E8A34E399B87B1ACD771 /* Pods_SwiftyToolTip_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEE5A4591A583015ED9E8C3C /* Pods_SwiftyToolTip_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -47,6 +48,7 @@
 		895D6BFF03694B85B8496730 /* Pods_SwiftyToolTip_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyToolTip_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA07A5A284DC8B1278AD6B9 /* Pods-SwiftyToolTip_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyToolTip_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyToolTip_Tests/Pods-SwiftyToolTip_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C40DA12E20B35C6B00246494 /* ToolTipDescriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolTipDescriptions.swift; sourceTree = "<group>"; };
+		C40DA13020B3617700246494 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		C40FFB9520AEA7CF00DADE95 /* AddScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScreenViewController.swift; sourceTree = "<group>"; };
 		C7F8AE9CEAA353C584F9054D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		D0D701097294240B34EA6003 /* SwiftyToolTip.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftyToolTip.podspec; path = ../SwiftyToolTip.podspec; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				607FACD71AFB9204008FA782 /* StoryboardViewController.swift */,
 				C40FFB9520AEA7CF00DADE95 /* AddScreenViewController.swift */,
 				C40DA12E20B35C6B00246494 /* ToolTipDescriptions.swift */,
+				C40DA13020B3617700246494 /* CustomTableViewCell.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -354,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* StoryboardViewController.swift in Sources */,
+				C40DA13120B3617700246494 /* CustomTableViewCell.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				C40DA12F20B35C6B00246494 /* ToolTipDescriptions.swift in Sources */,
 				C40FFB9620AEA7CF00DADE95 /* AddScreenViewController.swift in Sources */,
