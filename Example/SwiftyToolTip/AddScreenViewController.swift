@@ -25,19 +25,17 @@ class AddScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // UIView subclasses
+        // Adding tooltips to UIView elements and subclasses
         imageView.addToolTip(description: Description.ImageView.defaultImageView, gesture: .longPress)
         button.addToolTip(description: Description.Button.defaultButton , gesture: .longPress)
         label.addToolTip(description: Description.Label.defaultLabel, gesture: .longPress, isEnabled: false)
         segmentedControl.addToolTip(description: Description.OtherUIElements.segmentedControl, gesture: .longPress)
         slider.addToolTip(description: Description.OtherUIElements.slider, gesture: .longPress)
         progressView.addToolTip(description: Description.OtherUIElements.progressView, gesture: .longPress)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
-        // UIBarButtonItem class and subclasses
+        // Adding tooltip to UIBarButtonItem class and subclasses
         // 1 way to get a reference to the BarButtonItem and add a tool tip
         if let button = self.navigationItem.leftBarButtonItem {
             button.addToolTip(description: Description.BarButtonItems.backButton, gesture: .longPress, isEnabled: true)

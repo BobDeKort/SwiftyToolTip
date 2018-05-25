@@ -35,4 +35,10 @@ struct Description {
         static let saveButton = "Saves the new data and continues you to the next step"
         static let addButton = "Opens a new screen where you can create a new thing for your app"
     }
+    
+    struct tabBar {
+        static let tabbar = "Here you can switch between different sections of the app"
+        static let storyboardViewController = "Here we display a tableview with some tooltips."
+        static let otherViewcontroller = "Here we display other stuff"
+    }
 }

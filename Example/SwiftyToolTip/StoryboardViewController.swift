@@ -16,17 +16,26 @@ class StoryboardViewController: UIViewController, UITableViewDataSource, UITable
     let tableViewData = ["These cells",
                          "are just an example",
                          "on how you might use",
-                         "SwiftyToolTip"]
+                         "SwiftyToolTip with tableview cells"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 100
+        
+        // Here we add tool tips to individual tabbarbuttons
+        // Double tap does not work on tabbarButtons (Not sure why, yet!)
+        tabBarController?.tabBar.addToolTip(at: 0, description: Description.tabBar.storyboardViewController, gesture: .longPress, isEnabled: true)
+        tabBarController?.tabBar.addToolTip(at: 1, description: Description.tabBar.otherViewcontroller, gesture: .longPress, isEnabled: true)
+        
+        // This is a tooltip for the whole tabbar, added using the UIView implementation of Swifty tool tip
+        tabBarController?.tabBar.addToolTip(description: Description.tabBar.tabbar, gesture: .doubleTap)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         // Adding a tool tip to a UIBarButtonItem has to happen in the viewDidAppear
+        barButtonItem.addToolTip(description: "Add a new item to some list")
         barButtonItem.addToolTip(description: Description.BarButtonItems.addButton, gesture: .longPress)
     }
     
