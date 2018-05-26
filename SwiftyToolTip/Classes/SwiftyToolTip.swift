@@ -12,10 +12,10 @@ import UIKit
 
 // Contains everything we need to setup an display the tooltip
 public struct ViewDescription {
-    let text: String
-    let gesture: ViewDescriptionGestures
-    let senderType: SenderTypes
-    let isEnabled: Bool
+    let text: String                        // Text displayed in Tooltip
+    let gesture: ViewDescriptionGestures    // Gesture used to active Tooltip
+    let senderType: SenderTypes             // Used to identify how to display the toolTip
+    let isEnabled: Bool                     // Will prevent the displaying of the Tooltip
     
     init(description: String,
          gesture: ViewDescriptionGestures = .longPress,
@@ -28,16 +28,18 @@ public struct ViewDescription {
     }
 }
 
-// Used for keeping track on which button in the tabbar the tool tip has to display
+// Structure to keep track of what index of the tabbar has a Tooltip and the ViewDescription of the Tooltip
 class TabBarToolTip {
     let tabBar: UITabBar
-    var tooltips: [Int: ViewDescription]?
+    var tooltips: [Int: ViewDescription]?       // Map index with a ViewDesccript
     
     init(tabBar: UITabBar, tooltips: [Int: ViewDescription]?) {
         self.tabBar = tabBar
         self.tooltips = tooltips
     }
 
+    
+    // Adds a Tooltip to the TabBarButton at the given index
     func addToolTipAtIndex(index: Int, viewDescription: ViewDescription) {
         if tooltips != nil {
             self.tooltips![index] = viewDescription
@@ -46,6 +48,7 @@ class TabBarToolTip {
         }
     }
     
+    // Removes the Tooltip on the given index
     func removeToolTipAtIndex(index: Int) -> ViewDescription? {
         if var tooltips = tooltips {
             return tooltips.removeValue(forKey: index)
@@ -54,6 +57,7 @@ class TabBarToolTip {
         }
     }
     
+    // Get the tooltip from a given index
     func getToolTip(index: Int) -> ViewDescription? {
         if let tooltips = tooltips {
             return tooltips[index]
@@ -81,6 +85,7 @@ public enum ViewDescriptionPreferences {
     case backGroundColor
 }
 
+// Used to indentify how to display the Tooltip
 public enum SenderTypes {
     case UIView
     case UIBarButtonItem
@@ -501,8 +506,14 @@ public extension UIView {
 // MARK: UIBarButtonItem+Extension
 
 extension UIBarButtonItem {
-    /*
-     Make sure the tooltip is called in ViewDidAppear as the BarButtonItem has to be on screen and loaded.
+    /**
+     Adds a tooltip to the ToolTipManager and sets up the gesture to activate the tooltip on the BarButtonItem.
+     
+     - parameter description: This is the text displayed in the tool tip
+     - parameter gesture: The gesture used to show the tool tip. default = .longPress
+     - parameter isEnabled: Disables or enables the gesture on the view
+     
+     Notice: Make sure the tooltip is called in ViewDidAppear as the BarButtonItem has to be on screen and loaded.
      */
     public func addToolTip(description: String,
                            gesture: ViewDescriptionGestures = .longPress,
@@ -534,6 +545,9 @@ extension UIBarButtonItem {
         }
     }
     
+    /*
+     Displays the tooltip from self
+     */
     @objc func showToolTip() {
         SwiftyToolTipManager.instance.showToolTip(sender: self)
     }
@@ -584,6 +598,15 @@ extension UIBarButtonItem {
 // MARK: UITapBar
 
 extension UITabBar {
+    /**
+     Adds a tooltip to the ToolTipManager and sets up the gesture to activate the tooltip on the TabBarButton.
+     
+     - parameter description: This is the text displayed in the tool tip
+     - parameter gesture: The gesture used to show the tool tip. default = .longPress
+     - parameter isEnabled: Disables or enables the gesture on the view
+     
+     Notice: Make sure the tooltip is called in ViewDidAppear as the BarButtonItem has to be on screen and loaded.
+     */
     public func addToolTip(at index: Int,
                            description: String,
                            gesture: ViewDescriptionGestures = .longPress,
@@ -609,6 +632,9 @@ extension UITabBar {
         }
     }
 
+    /*
+     Displays the tooltip from the UITabBarButton
+     */
     @objc public func showToolTip(recognizer: UIGestureRecognizer) {
         guard recognizer.state == .began else { return }
         guard let tabBar = recognizer.view as? UITabBar else { return }
@@ -624,14 +650,6 @@ extension UITabBar {
             break
         }
     }
-
-//    /*
-//     Use this one on UITabbar not the one without the index
-//     */
-//    @objc public func showToolTip(index: Int) {
-//
-//        SwiftyToolTipManager.instance.showToolTip(sender: self, index: index)
-//    }
 }
 
 
