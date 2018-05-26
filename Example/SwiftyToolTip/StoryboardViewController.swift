@@ -16,7 +16,10 @@ class StoryboardViewController: UIViewController, UITableViewDataSource, UITable
     let tableViewData = ["These cells",
                          "are just an example",
                          "on how you might use",
-                         "SwiftyToolTip with tableview cells"]
+                         "SwiftyToolTip",
+                         "Double tap the cell",
+                         "Or long press on the label",
+                         "and image"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +49,11 @@ class StoryboardViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath)
         
+        cell.imageView?.image = #imageLiteral(resourceName: "IMG_0354 copy")
+        cell.imageView?.contentMode = .scaleAspectFit
+        
+        cell.imageView?.addToolTip(description: "This is an ImageView", gesture: .longPress, isEnabled: true)
+        
         cell.textLabel?.text = tableViewData[indexPath.row]
         // Adding a tooltip to the label in the cell
         cell.textLabel?.addToolTip(description: Description.Label.defaultLabel, gesture: .longPress)
@@ -53,6 +61,10 @@ class StoryboardViewController: UIViewController, UITableViewDataSource, UITable
         // Make sure to use a different gesture recognizer for elements inside the cell and the cell itself.
         cell.addToolTip(description: "This is a UITableViewCell", gesture: .doubleTap)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 
     override func didReceiveMemoryWarning() {
