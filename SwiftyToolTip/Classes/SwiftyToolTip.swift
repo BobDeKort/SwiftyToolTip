@@ -548,7 +548,7 @@ extension UIBarButtonItem {
     /*
      Displays the tooltip from self
      */
-    @objc func showToolTip() {
+    @objc public func showToolTip() {
         SwiftyToolTipManager.instance.showToolTip(sender: self)
     }
     

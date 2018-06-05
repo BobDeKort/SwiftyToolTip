@@ -1,5 +1,7 @@
 # SwiftyToolTip
 
+![SwiftyToolTip example video](https://thumbs.gfycat.com/SlightBriefCanary-size_restricted.gif)
+
 [![CI Status](https://img.shields.io/travis/BobDeKort/SwiftyToolTip.svg?style=flat)](https://travis-ci.org/BobDeKort/SwiftyToolTip)
 [![Version](https://img.shields.io/cocoapods/v/SwiftyToolTip.svg?style=flat)](https://cocoapods.org/pods/SwiftyToolTip)
 [![License](https://img.shields.io/cocoapods/l/SwiftyToolTip.svg?style=flat)](https://cocoapods.org/pods/SwiftyToolTip)
@@ -89,7 +91,7 @@ tabBarController?.tabBar.addToolTip(description: Description.tabBar.tabbar, gest
 - Think when adding tooltips, you could override an existing gesture without you knowing
 - When adding tooltips to a UIView that has subviews with tooltips, make sure to use a different gesture for the superview.
 - Currently supported gestures are: DoubleTap and LongPress.
-- isEnabled adds the tooltip but will not display so.
+- isEnabled adds the tooltip but will not display. 
 
 
 - Use nested structs to keep your descriptions clean and in one place, you could also use other structures, such as json. This is just a suggestion, I'm sure there are better ways to store this data. Example:

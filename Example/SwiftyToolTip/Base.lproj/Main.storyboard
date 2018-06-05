@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item 2-->
+        <!--Second View Controller-->
         <scene sceneID="WjI-hH-8Xv">
             <objects>
-                <viewController id="i1f-nY-mwD" sceneMemberID="viewController">
+                <viewController id="i1f-nY-mwD" customClass="SecondViewController" customModule="SwiftyToolTip_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eSi-fZ-5wP"/>
                         <viewControllerLayoutGuide type="bottom" id="8N8-vI-Mia"/>
@@ -21,13 +21,28 @@
                     <view key="view" contentMode="scaleToFill" id="6Z5-DS-wnb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Not much to see here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUh-zE-0AQ">
+                                <rect key="frame" x="99" y="323" width="177" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="IUh-zE-0AQ" firstAttribute="centerY" secondItem="6Z5-DS-wnb" secondAttribute="centerY" id="IrU-J3-dCx"/>
+                            <constraint firstItem="IUh-zE-0AQ" firstAttribute="centerX" secondItem="6Z5-DS-wnb" secondAttribute="centerX" id="Nv1-7M-QRW"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="oK0-x9-rfH"/>
+                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="oK0-x9-rfH"/>
+                    <connections>
+                        <outlet property="label" destination="IUh-zE-0AQ" id="dfx-es-9pb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ea6-zk-Ifj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="734" y="213"/>
+            <point key="canvasLocation" x="733.60000000000002" y="212.74362818590706"/>
         </scene>
         <!--SwiftyToolTip-->
         <scene sceneID="DVj-u9-rV2">
@@ -45,7 +60,7 @@
                                 <rect key="frame" x="16" y="64" width="343" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="customCell" id="wun-Zf-ggf">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="customCell" id="wun-Zf-ggf">
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wun-Zf-ggf" id="vEU-Cn-xac">
@@ -111,9 +126,6 @@
                                     <constraint firstAttribute="width" constant="114" id="UAC-ue-Uov"/>
                                 </constraints>
                             </slider>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Wyn-0b-oPp">
-                                <rect key="frame" x="105" y="604" width="165" height="2"/>
-                            </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Um4-9c-lQj">
                                 <rect key="frame" x="167" y="375" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -125,6 +137,7 @@
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="buttonAction:" destination="C2S-r6-iZy" eventType="touchUpInside" id="Q3e-75-C2P"/>
+                                    <action selector="buttonAction:" destination="ShN-hI-a5v" eventType="touchUpInside" id="VLf-j5-ybr"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -132,7 +145,6 @@
                         <constraints>
                             <constraint firstItem="aVK-5L-oy7" firstAttribute="top" secondItem="vjW-We-aQh" secondAttribute="bottom" constant="50" id="7II-M1-X2K"/>
                             <constraint firstItem="aVK-5L-oy7" firstAttribute="centerX" secondItem="xIM-sq-VHO" secondAttribute="centerX" id="971-f2-neg"/>
-                            <constraint firstItem="Wyn-0b-oPp" firstAttribute="top" secondItem="aVK-5L-oy7" secondAttribute="bottom" constant="50" id="9L9-4J-CD8"/>
                             <constraint firstItem="Um4-9c-lQj" firstAttribute="centerX" secondItem="xIM-sq-VHO" secondAttribute="centerX" id="BV0-C8-4jK"/>
                             <constraint firstItem="vjW-We-aQh" firstAttribute="top" secondItem="Um4-9c-lQj" secondAttribute="bottom" constant="50" id="F9e-TO-c3m"/>
                             <constraint firstItem="ARC-Ar-FZE" firstAttribute="centerX" secondItem="xIM-sq-VHO" secondAttribute="centerX" id="Jaq-5U-tVW"/>
@@ -141,9 +153,7 @@
                             <constraint firstItem="WtH-JL-uMp" firstAttribute="top" secondItem="e3d-tj-gec" secondAttribute="bottom" id="QIE-Uw-4sL"/>
                             <constraint firstItem="vjW-We-aQh" firstAttribute="centerX" secondItem="xIM-sq-VHO" secondAttribute="centerX" id="U2Q-Yh-lL8"/>
                             <constraint firstItem="WtH-JL-uMp" firstAttribute="leading" secondItem="xIM-sq-VHO" secondAttribute="leading" id="YUk-IV-q6c"/>
-                            <constraint firstItem="Wyn-0b-oPp" firstAttribute="centerX" secondItem="aVK-5L-oy7" secondAttribute="centerX" id="c6S-2A-AeE"/>
                             <constraint firstItem="Um4-9c-lQj" firstAttribute="top" secondItem="ARC-Ar-FZE" secondAttribute="bottom" constant="50" id="gcr-qI-LrG"/>
-                            <constraint firstItem="Wyn-0b-oPp" firstAttribute="leading" secondItem="xIM-sq-VHO" secondAttribute="leadingMargin" constant="89" id="sJf-Ho-sgK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="More examples" id="PEh-Bx-Ceh">
@@ -158,7 +168,6 @@
                         <outlet property="button" destination="ARC-Ar-FZE" id="Vgw-zH-U2x"/>
                         <outlet property="imageView" destination="WtH-JL-uMp" id="wvs-1Y-jfv"/>
                         <outlet property="label" destination="Um4-9c-lQj" id="Pqu-dT-oN8"/>
-                        <outlet property="progressView" destination="Wyn-0b-oPp" id="HjW-Za-Ymk"/>
                         <outlet property="segmentedControl" destination="vjW-We-aQh" id="k9Y-IC-pfZ"/>
                         <outlet property="slider" destination="aVK-5L-oy7" id="7GL-gL-zm2"/>
                     </connections>
@@ -185,11 +194,11 @@
             </objects>
             <point key="canvasLocation" x="-222" y="-120"/>
         </scene>
-        <!--Item 1-->
+        <!--Navigation Controller-->
         <scene sceneID="LQ0-Gn-mPw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9zq-GP-uju" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="nGw-3d-XTv"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="nGw-3d-XTv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ESw-ty-a6P">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

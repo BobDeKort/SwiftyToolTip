@@ -12,6 +12,7 @@ struct Description {
     struct Label {
         static let defaultLabel = "This is a Label, a Label displays text"
         static let otherLabel = "This is another label, this label can also display text"
+        static let justMore = "Just one more tooltip"
     }
     
     struct Button {

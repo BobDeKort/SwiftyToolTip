@@ -17,10 +17,19 @@ class AddScreenViewController: UIViewController {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var slider: UISlider!
-    @IBOutlet weak var progressView: UIProgressView!
     
     @IBAction func backAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func buttonAction(_ sender: Any) {
+        
+        // Working on a cleaner way of presenting a one time tooltip
+        imageView.removeToolTip()
+        imageView.addToolTip(description: "You can also present the tooltips in code when you want it.")
+        imageView.showToolTip()
+        imageView.removeToolTip()
+        imageView.addToolTip(description: Description.ImageView.defaultImageView, gesture: .longPress)
     }
     
     override func viewDidLoad() {
@@ -32,7 +41,6 @@ class AddScreenViewController: UIViewController {
         label.addToolTip(description: Description.Label.defaultLabel, gesture: .longPress, isEnabled: false)
         segmentedControl.addToolTip(description: Description.OtherUIElements.segmentedControl, gesture: .longPress)
         slider.addToolTip(description: Description.OtherUIElements.slider, gesture: .longPress)
-        progressView.addToolTip(description: Description.OtherUIElements.progressView, gesture: .longPress)
     }
     
     override func viewDidAppear(_ animated: Bool) {
