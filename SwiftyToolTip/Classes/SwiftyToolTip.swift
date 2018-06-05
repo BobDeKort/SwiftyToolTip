@@ -207,7 +207,7 @@ class SwiftyToolTipManager {
     fileprivate func removeToolTip(tabbar: UITabBar, index: Int?) -> ViewDescription? {
         // If the index is given removes the tooltip at index
         if let index = index {
-            var tabBarToolTips = activeToolTipsTabBar[tabbar]
+            let tabBarToolTips = activeToolTipsTabBar[tabbar]
             return tabBarToolTips?.removeToolTipAtIndex(index: index)
         // Else remove all tooltips of that tabbar
         } else {
