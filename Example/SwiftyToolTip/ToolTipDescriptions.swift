@@ -12,6 +12,7 @@ struct Description {
     struct Label {
         static let defaultLabel = "This is a Label, a Label displays text"
         static let otherLabel = "This is another label, this label can also display text"
+        static let justMore = "Just one more tooltip"
     }
     
     struct Button {
@@ -34,5 +35,11 @@ struct Description {
         static let cancelButton = "Go back to previous view controller and cancel all tasks or information given"
         static let saveButton = "Saves the new data and continues you to the next step"
         static let addButton = "Opens a new screen where you can create a new thing for your app"
+    }
+    
+    struct tabBar {
+        static let tabbar = "Here you can switch between different sections of the app"
+        static let storyboardViewController = "Here we display a tableview with some tooltips."
+        static let otherViewcontroller = "Here we display other stuff"
     }
 }

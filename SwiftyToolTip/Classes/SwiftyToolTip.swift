@@ -12,10 +12,10 @@ import UIKit
 
 // Contains everything we need to setup an display the tooltip
 public struct ViewDescription {
-    let text: String
-    let gesture: ViewDescriptionGestures
-    let senderType: SenderTypes
-    let isEnabled: Bool
+    let text: String                        // Text displayed in Tooltip
+    let gesture: ViewDescriptionGestures    // Gesture used to active Tooltip
+    let senderType: SenderTypes             // Used to identify how to display the toolTip
+    let isEnabled: Bool                     // Will prevent the displaying of the Tooltip
     
     init(description: String,
          gesture: ViewDescriptionGestures = .longPress,
@@ -25,6 +25,45 @@ public struct ViewDescription {
         self.gesture = gesture
         self.senderType = senderType
         self.isEnabled = isEnabled
+    }
+}
+
+// Structure to keep track of what index of the tabbar has a Tooltip and the ViewDescription of the Tooltip
+class TabBarToolTip {
+    let tabBar: UITabBar
+    var tooltips: [Int: ViewDescription]?       // Map index with a ViewDesccript
+    
+    init(tabBar: UITabBar, tooltips: [Int: ViewDescription]?) {
+        self.tabBar = tabBar
+        self.tooltips = tooltips
+    }
+
+    
+    // Adds a Tooltip to the TabBarButton at the given index
+    func addToolTipAtIndex(index: Int, viewDescription: ViewDescription) {
+        if tooltips != nil {
+            self.tooltips![index] = viewDescription
+        } else {
+            self.tooltips = [index: viewDescription]
+        }
+    }
+    
+    // Removes the Tooltip on the given index
+    func removeToolTipAtIndex(index: Int) -> ViewDescription? {
+        if var tooltips = tooltips {
+            return tooltips.removeValue(forKey: index)
+        } else {
+            return nil
+        }
+    }
+    
+    // Get the tooltip from a given index
+    func getToolTip(index: Int) -> ViewDescription? {
+        if let tooltips = tooltips {
+            return tooltips[index]
+        } else {
+            return nil
+        }
     }
 }
 
@@ -46,9 +85,11 @@ public enum ViewDescriptionPreferences {
     case backGroundColor
 }
 
+// Used to indentify how to display the Tooltip
 public enum SenderTypes {
     case UIView
     case UIBarButtonItem
+    case UITabBar
 }
 
 // MARK: SwiftyToolTipManager
@@ -71,11 +112,15 @@ class SwiftyToolTipManager {
     // Keeps track of the active descriptions on UIBarButtonItems and holds their configuration
     private var activeToolTipsBarButtons: [UIBarButtonItem: ViewDescription] = [:]
     
+    // Keeps track of the active descriptions on UITabBars and holds their configuration
+    private var activeToolTipsTabBar: [UITabBar: TabBarToolTip] = [:]
+    
     // Preferences
     var font: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize)
     var textColor: UIColor = .black
     var backgroundColor: UIColor? = nil
     
+    // SHOW
     // Gets the description text for the given view from activeToolTipsViews if available. And displays the tooltip
     fileprivate func showToolTip(sender: UIView) {
         guard let description = getToolTip(view: sender) else {
@@ -102,6 +147,20 @@ class SwiftyToolTipManager {
         }
     }
     
+    fileprivate func showToolTip(sender: UIView, tabBar: UITabBar, index: Int) {
+        
+        guard let toolTipInfo = getToolTip(tabbar: tabBar, index: index) else {
+            // TODO: Handle error
+            print("View has no description - TabBar")
+            return
+        }
+        
+        if toolTipInfo.isEnabled {
+            toolTipWindow.show(sender, senderBarButton: nil, description: toolTipInfo.text)
+        }
+    }
+    
+    // Add
     // Adds a new description to the activeToolTipsViews dictionary
     fileprivate func addActiveToolTip(view: UIView,
                                       description: String,
@@ -118,6 +177,22 @@ class SwiftyToolTipManager {
         activeToolTipsBarButtons[barButton] = ViewDescription(description: description, gesture: gesture, senderType: .UIBarButtonItem)
     }
     
+    fileprivate func addActiveToolTipAtIndex(tabBar: UITabBar,
+                                      index: Int,
+                                      description: String,
+                                      gesture: ViewDescriptionGestures,
+                                      isEnabled: Bool = true) {
+        let description = ViewDescription(description: description, gesture: gesture, senderType: .UITabBar, isEnabled: isEnabled)
+        
+        if let tooltips = activeToolTipsTabBar[tabBar] {
+            tooltips.addToolTipAtIndex(index: index, viewDescription: description)
+        } else {
+            let tabbarToolTip = TabBarToolTip(tabBar: tabBar, tooltips: [index: description])
+            activeToolTipsTabBar[tabBar] = tabbarToolTip
+        }
+    }
+    
+    // Remove
     // Removes the description from the given view from the activeToolTipsViews
     fileprivate func removeToolTip(view: UIView) -> ViewDescription? {
         return activeToolTipsViews.removeValue(forKey: view)
@@ -128,6 +203,23 @@ class SwiftyToolTipManager {
         return activeToolTipsBarButtons.removeValue(forKey: barButton)
     }
     
+    // Removes the description from the given tabbarButton from the active tooltips
+    fileprivate func removeToolTip(tabbar: UITabBar, index: Int?) -> ViewDescription? {
+        // If the index is given removes the tooltip at index
+        if let index = index {
+            var tabBarToolTips = activeToolTipsTabBar[tabbar]
+            return tabBarToolTips?.removeToolTipAtIndex(index: index)
+        // Else remove all tooltips of that tabbar
+        } else {
+            let isRemoved = activeToolTipsTabBar.removeValue(forKey: tabbar)
+            guard isRemoved != nil else {
+                return nil
+            }
+            return ViewDescription(description: "Removed all tootips of tabbar", gesture: .longPress, senderType: .UITabBar, isEnabled: true)
+        }
+    }
+    
+    // GET 1
     // Returns the configutation for a given view
     fileprivate func getToolTip(view: UIView) -> ViewDescription? {
         return activeToolTipsViews[view]
@@ -138,16 +230,28 @@ class SwiftyToolTipManager {
         return activeToolTipsBarButtons[barbutton]
     }
     
+    // Returns the configuration for the given tabbarbutton
+    fileprivate func getToolTip(tabbar: UITabBar, index: Int) -> ViewDescription? {
+        return activeToolTipsTabBar[tabbar]?.getToolTip(index: index)
+    }
+    
     // Getter function to get all active descriptions and configuration on views
     public func getToolTipsViews() -> [UIView: ViewDescription] {
         return self.activeToolTipsViews
     }
     
+    // GET all
     // Getter function to get all active descriptions and configuration on bar buttons
     public func getToolTipsBarButtons() -> [UIBarButtonItem: ViewDescription] {
         return self.activeToolTipsBarButtons
     }
     
+    // Getter function to get all active descriptions and configuration on tabbar buttons
+    public func getToolTipsTabbar() -> [UITabBar: TabBarToolTip] {
+        return self.activeToolTipsTabBar
+    }
+    
+    // Preferences
     // Takes in an dictionary of preferences and sets them in the singleton
     func setPreferences(preferences: [ViewDescriptionPreferences: Any]) {
         for preference in preferences {
@@ -284,12 +388,15 @@ private class ToolTipViewController: UIViewController, UIPopoverPresentationCont
             ppc?.backgroundColor = self.backgroundColor
             ppc?.permittedArrowDirections = .any
             ppc?.delegate = self
+            
             if let senderView = senderView {
                 ppc?.sourceRect = senderView.bounds
                 ppc?.sourceView = senderView
             } else if let senderBarButton = senderBarButton {
                 ppc?.barButtonItem = senderBarButton
             }
+            
+            
             
             // Present Popover
             present(popOverVC!, animated: true, completion: nil)
@@ -399,8 +506,14 @@ public extension UIView {
 // MARK: UIBarButtonItem+Extension
 
 extension UIBarButtonItem {
-    /*
-     Make sure the tooltip is called in ViewDidAppear as the BarButtonItem has to be on screen and loaded.
+    /**
+     Adds a tooltip to the ToolTipManager and sets up the gesture to activate the tooltip on the BarButtonItem.
+     
+     - parameter description: This is the text displayed in the tool tip
+     - parameter gesture: The gesture used to show the tool tip. default = .longPress
+     - parameter isEnabled: Disables or enables the gesture on the view
+     
+     Notice: Make sure the tooltip is called in ViewDidAppear as the BarButtonItem has to be on screen and loaded.
      */
     public func addToolTip(description: String,
                            gesture: ViewDescriptionGestures = .longPress,
@@ -432,7 +545,10 @@ extension UIBarButtonItem {
         }
     }
     
-    @objc func showToolTip() {
+    /*
+     Displays the tooltip from self
+     */
+    @objc public func showToolTip() {
         SwiftyToolTipManager.instance.showToolTip(sender: self)
     }
     
@@ -479,5 +595,62 @@ extension UIBarButtonItem {
     }
 }
 
-// MARK: UIBar
+// MARK: UITapBar
+
+extension UITabBar {
+    /**
+     Adds a tooltip to the ToolTipManager and sets up the gesture to activate the tooltip on the TabBarButton.
+     
+     - parameter description: This is the text displayed in the tool tip
+     - parameter gesture: The gesture used to show the tool tip. default = .longPress
+     - parameter isEnabled: Disables or enables the gesture on the view
+     
+     Notice: Make sure the tooltip is called in ViewDidAppear as the BarButtonItem has to be on screen and loaded.
+     */
+    public func addToolTip(at index: Int,
+                           description: String,
+                           gesture: ViewDescriptionGestures = .longPress,
+                           isEnabled: Bool = true) {
+
+        SwiftyToolTipManager.instance.addActiveToolTipAtIndex(tabBar: self, index: index, description: description, gesture: gesture, isEnabled: isEnabled)
+
+        
+        switch gesture {
+        case .longPress:
+            let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(showToolTip(recognizer:)))
+            if #available(iOS 11.0, *) {
+                longGesture.name = "ToolTipGesture"
+            }
+            self.addGestureRecognizer(longGesture)
+        case .doubleTap:
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showToolTip(recognizer:)))
+            if #available(iOS 11.0, *) {
+                tapGesture.name = "ToolTipGesture"
+            }
+            tapGesture.numberOfTapsRequired = 2
+            self.addGestureRecognizer(tapGesture)
+        }
+    }
+
+    /*
+     Displays the tooltip from the UITabBarButton
+     */
+    @objc public func showToolTip(recognizer: UIGestureRecognizer) {
+        guard recognizer.state == .began else { return }
+        guard let tabBar = recognizer.view as? UITabBar else { return }
+        guard let tabBarItems = tabBar.items else { return }
+
+        let loc = recognizer.location(in: tabBar)
+
+        for (index, item) in tabBarItems.enumerated() {
+            guard let view = item.value(forKey: "view") as? UIView else { continue }
+            guard view.frame.contains(loc) else { continue }
+
+            SwiftyToolTipManager.instance.showToolTip(sender: view, tabBar: self, index: index)
+            break
+        }
+    }
+}
+
+
 
